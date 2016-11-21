@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Stugo.ReduxUi</id>
+    <version>$version$</version>
+    <authors>Stugo Ltd</authors>
+    <description>Provides tools to implement a UI with redux principles</description>
+    <copyright>Copyright © Stugo Ltd 2016</copyright>
+  </metadata>
+  <files>
+    <file src="bin\net45\Stugo.ReduxUi.dll" target="lib\net45\" />
+    <file src="bin\net45\Stugo.ReduxUi.pdb" target="lib\net45\" />
+  </files>
+</package>
