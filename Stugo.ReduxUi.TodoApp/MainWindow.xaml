@@ -1,0 +1,33 @@
+﻿<Window x:Class="Stugo.ReduxUi.TodoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance state:TodoAppRoot}"
+        xmlns:ui="clr-namespace:Stugo.ReduxUi;assembly=Stugo.ReduxUi"
+        xmlns:views="clr-namespace:Stugo.ReduxUi.TodoApp.Views"
+        xmlns:state="clr-namespace:Stugo.ReduxUi.TodoApp.State"
+        Title="Todo App" Height="350" Width="525">
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <views:EditTodoView />
+
+        <ListView x:Name="todosListBox" Grid.Row="2" ItemsSource="{Binding TodoItems}" 
+                  SelectionChanged="TodosListBox_OnSelectionChanged" 
+                  KeyDown="TodosListBox_OnKeyDown">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="state:Todo">
+                    <TextBlock Text="{Binding Text}" HorizontalAlignment="Center" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <TextBlock Grid.Row="3" Text="{Binding TodoItems.Length, StringFormat='{}You have {0} todo items'}" />
+    </Grid>
+</Window>
