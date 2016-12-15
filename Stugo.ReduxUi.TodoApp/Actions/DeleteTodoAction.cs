@@ -3,7 +3,7 @@
 namespace Stugo.ReduxUi.TodoApp.Actions
 {
     class DeleteTodoAction
-    {
+    { 
         public DeleteTodoAction(Todo todo)
         {
             Todo = todo;

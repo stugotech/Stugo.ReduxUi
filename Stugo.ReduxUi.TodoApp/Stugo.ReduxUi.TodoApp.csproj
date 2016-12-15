@@ -64,6 +64,8 @@
     <Compile Include="Actions\SelectTodoAction.cs" />
     <Compile Include="Actions\UpdateTodoAction.cs" />
     <Compile Include="Bind.cs" />
+    <Compile Include="Reducers\TodoAppReducer.cs" />
+    <Compile Include="Reducers\TodoCollectionReducer.cs" />
     <Compile Include="Redux.cs" />
     <Compile Include="State\TodoCollection.cs" />
     <Compile Include="TodoAppStore.cs" />

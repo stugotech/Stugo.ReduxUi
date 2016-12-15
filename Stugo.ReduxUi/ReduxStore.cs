@@ -4,18 +4,19 @@ using Stugo.ReduxUi.State;
 namespace Stugo.ReduxUi
 {
     public class ReduxStore<TState, TActionBase> : IReduxStore<TState, TActionBase>
-        where TState : IReduxState<TState, TActionBase>, new()
+        where TState : new()
     {
-        public delegate TState ReducerDelegate(TState state, object message);
-
         private readonly SynchronizationContext synchronizationContext;
+        private readonly ReducerDelegate<TState, TActionBase> reducer;
         private readonly ISafeEventManager<StateChangedMessage<TState>> stateChangedEvent =
             new SafeEventManager<StateChangedMessage<TState>>();
 
 
-        public ReduxStore(SynchronizationContext synchronizationContext)
+        public ReduxStore(SynchronizationContext synchronizationContext,
+            ReducerDelegate<TState, TActionBase> reducer)
         {
             this.synchronizationContext = synchronizationContext;
+            this.reducer = reducer;
             State = new TState();
         }
 
@@ -35,11 +36,14 @@ namespace Stugo.ReduxUi
 
         private void DoDispatch(object action)
         {
-            var oldState = State;
-            State = State.ApplyAction((TActionBase)action);
+            var newState = reducer(State, (TActionBase)action);
 
-            if (!object.ReferenceEquals(oldState, State))
-                stateChangedEvent.Invoke(new StateChangedMessage<TState>(oldState, State));
+            if (!ReferenceEquals(newState, State))
+            {
+                var message = new StateChangedMessage<TState>(State, newState);
+                State = newState;
+                stateChangedEvent.Invoke(message);
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Stugo.ReduxUi.TodoApp.Actions
             Todo = todo;
         }
 
+
         public Todo Todo { get; }
     }
 }

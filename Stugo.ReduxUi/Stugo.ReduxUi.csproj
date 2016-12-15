@@ -42,18 +42,12 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="State\Convention\ConventionStateMutator.cs" />
-    <Compile Include="State\Convention\ConventionMutatorBuilder.cs" />
     <Compile Include="State\StateExtensions.cs" />
-    <Compile Include="State\StateMutatorCollection.cs" />
     <Compile Include="State\INotifyStateChanged.cs" />
-    <Compile Include="State\IReduxState.cs" />
     <Compile Include="IReduxStore.cs" />
-    <Compile Include="State\IStateMutator.cs" />
     <Compile Include="ReduxStore.cs" />
     <Compile Include="State\StateChangedMessage.cs" />
-    <Compile Include="State\StateMutatorDelegate.cs" />
-    <Compile Include="TypeAnalayser.cs" />
+    <Compile Include="State\ReducerDelegate.cs" />
     <None Include="packages.config" />
     <None Include="Stugo.ReduxUi.nuspec" />
     <Compile Include="IReduxDispatcher.cs" />
