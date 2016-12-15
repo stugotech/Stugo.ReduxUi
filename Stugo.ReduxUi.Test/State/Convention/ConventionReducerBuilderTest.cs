@@ -5,16 +5,16 @@ using Xunit;
 
 namespace Stugo.ReduxUi.Test.State.Convention
 {
-    public class ConventionMutatorBuilderTest
+    public class ConventionReducerBuilderTest
     {
         [Fact]
         public void TryBuildMutator_creates_a_mutator_function()
         {
             var state = new StringState("hello ");
-            var method = ((Func<AppendAction, StringState>)state.Append).Method;
-            StateMutatorDelegate<StringState, IAction> mutator;
+            var method = ((ReducerDelegate<StringState, AppendAction>)StringStateReducer.Append).Method;
+            ReducerDelegate<StringState, IAction> mutator;
 
-            var actionType = ConventionMutatorBuilder.TryBuildMutator(method, out mutator);
+            var actionType = ConventionReducerBuilder.TryBuildReducer(method, out mutator);
 
             Assert.Equal(typeof(AppendAction), actionType);
 
@@ -26,7 +26,7 @@ namespace Stugo.ReduxUi.Test.State.Convention
         [Fact]
         public void GetMutators_returns_all_valid_mutators()
         {
-            var mutators = ConventionMutatorBuilder.GetMutators<StringState, IAction>();
+            var mutators = ConventionReducerBuilder.GetReducers<StringStateReducer, StringState, IAction>();
 
             Assert.Equal(2, mutators.Count);
             Assert.True(mutators.ContainsKey(typeof(AppendAction)));
@@ -73,33 +73,44 @@ namespace Stugo.ReduxUi.Test.State.Convention
 
 
             public string Text { get; }
+        }
 
 
-            public StringState Append(AppendAction action)
+        class StringStateReducer
+        {
+            public static StringState Append(StringState initialState, AppendAction action)
             {
-                return new StringState(Text + action.AppendText);
+                return new StringState(initialState.Text + action.AppendText);
             }
 
 
-            public StringState Surround(SurroundAction action)
+            public static StringState Surround(StringState initialState, SurroundAction action)
             {
-                return new StringState(action.SurroundText + Text + action.SurroundText);
+                return new StringState(action.SurroundText + initialState.Text + action.SurroundText);
             }
 
 
-            public string GetText(AppendAction action)
+            public static object WrongReturnType(StringState initialState, SurroundAction action)
             {
-                return action.AppendText;
+                return null;
             }
 
-            public StringState Append(string a, string b)
+
+            public static StringState WrongActionType(StringState initialState, object action)
             {
-                return new StringState(Text + a + b);
+                return null;
             }
 
-            public StringState Append(int a)
+
+            public static StringState WrongStateType(object initialState, SurroundAction action)
             {
-                return new StringState(Text + a);
+                return null;
+            }
+
+
+            public static StringState SomethingElse()
+            {
+                return null;
             }
         }
     }

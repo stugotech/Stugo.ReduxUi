@@ -3,7 +3,6 @@
 namespace Stugo.ReduxUi
 {
     public interface IReduxStore<TState, in TAction> : IReduxDispatcher<TAction>, INotifyStateChanged<TState>
-        where TState: IReduxState<TState, TAction>
     {
         TState State { get; }
     }

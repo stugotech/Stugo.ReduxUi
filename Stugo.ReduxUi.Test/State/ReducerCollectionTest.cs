@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Stugo.ReduxUi.State;
+﻿using Stugo.ReduxUi.State;
 using Xunit;
 
 namespace Stugo.ReduxUi.Test.State
 {
-    public class StateMutatorCollectionTest
+    public class ReducerCollectionTest
     {
         [Fact]
         public void It_returns_a_mutator_registered_for_the_given_type()
         {
-            var collection = new StateMutatorCollection<string, object>();
+            var collection = new ReducerCollection<string, object>();
             collection.Add<A1>(MutateA1);
             collection.Add<A>(MutateA);
 
@@ -27,7 +22,7 @@ namespace Stugo.ReduxUi.Test.State
         [Fact]
         public void It_returns_a_mutator_registered_for_a_less_derived_type()
         {
-            var collection = new StateMutatorCollection<string, object>();
+            var collection = new ReducerCollection<string, object>();
             collection.Add<A1>(MutateA1);
             collection.Add<A>(MutateA);
 
@@ -41,7 +36,7 @@ namespace Stugo.ReduxUi.Test.State
         [Fact]
         public void It_returns_null_if_no_mutator_found()
         {
-            var collection = new StateMutatorCollection<string, object>();
+            var collection = new ReducerCollection<string, object>();
             collection.Add<A1>(MutateA1);
             collection.Add<A>(MutateA);
 
