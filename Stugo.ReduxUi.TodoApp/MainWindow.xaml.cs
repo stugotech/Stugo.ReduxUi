@@ -13,35 +13,25 @@ namespace Stugo.ReduxUi.TodoApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly TodoAppStore store;
-
-
         public MainWindow()
         {
-            store = new TodoAppStore(SynchronizationContext.Current);
-            store.StateChanged.AddHandler(this, x => x.OnStoreStateChanged);
-            Redux.SetStore(this, store);
             InitializeComponent();
-        }
-
-
-        private void OnStoreStateChanged(StateChangedMessage<TodoAppRoot> state)
-        {
-            this.DataContext = state.NewState;
         }
 
 
         private void TodosListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            store.Dispatch(new SelectTodoAction((Todo)todosListBox.SelectedItem));
+            Redux.GetStore(this).Dispatcher.Dispatch(new SelectTodoAction((Todo)todosListBox.SelectedItem));
         }
 
 
         private void TodosListBox_OnKeyDown(object sender, KeyEventArgs e)
         {
+            var store = Redux.GetStore(this);
+
             if (e.Key == Key.Delete && store.State.SelectedTodo != null)
             {
-                store.Dispatch(new DeleteTodoAction(store.State.SelectedTodo));
+                store.Dispatcher.Dispatch(new DeleteTodoAction(store.State.SelectedTodo));
             }
         }
     }

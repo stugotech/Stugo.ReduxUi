@@ -1,4 +1,5 @@
 ﻿namespace Stugo.ReduxUi.State
 {
-    public delegate TState ReducerDelegate<TState, in TActionBase>(TState initialState, TActionBase action);
+    public delegate IReducerResult<TState, TEffect> ReducerDelegate<TState, out TEffect, in TActionBase>(
+        TState initialState, TActionBase action);
 }

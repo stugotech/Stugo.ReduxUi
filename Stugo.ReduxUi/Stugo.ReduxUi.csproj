@@ -42,11 +42,18 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DispatchDelegate.cs" />
+    <Compile Include="Middleware\HandleEffectsMiddleware.cs" />
+    <Compile Include="Middleware\IMiddleware.cs" />
+    <Compile Include="Middleware\MiddlewareExtensions.cs" />
+    <Compile Include="State\ReducerExtensions.cs" />
+    <Compile Include="ReduxAppBase.cs" />
+    <Compile Include="ReduxDispatcher.cs" />
+    <Compile Include="Middleware\StateChangedMiddleware.cs" />
+    <Compile Include="State\IReducerResult.cs" />
+    <Compile Include="State\MiddlewareDelegate.cs" />
+    <Compile Include="State\ReducerResult.cs" />
     <Compile Include="State\StateExtensions.cs" />
-    <Compile Include="State\INotifyStateChanged.cs" />
-    <Compile Include="IReduxStore.cs" />
-    <Compile Include="ReduxStore.cs" />
-    <Compile Include="State\StateChangedMessage.cs" />
     <Compile Include="State\ReducerDelegate.cs" />
     <None Include="packages.config" />
     <None Include="Stugo.ReduxUi.nuspec" />

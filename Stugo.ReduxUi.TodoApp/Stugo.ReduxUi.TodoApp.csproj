@@ -61,14 +61,18 @@
     </ApplicationDefinition>
     <Compile Include="Actions\AddTodoAction.cs" />
     <Compile Include="Actions\DeleteTodoAction.cs" />
+    <Compile Include="Actions\RollDiceAction.cs" />
     <Compile Include="Actions\SelectTodoAction.cs" />
     <Compile Include="Actions\UpdateTodoAction.cs" />
     <Compile Include="Bind.cs" />
+    <Compile Include="Effects\RollDiceEffect.cs" />
+    <Compile Include="Middleware\RollDiceMiddleware.cs" />
     <Compile Include="Reducers\TodoAppReducer.cs" />
     <Compile Include="Reducers\TodoCollectionReducer.cs" />
     <Compile Include="Redux.cs" />
     <Compile Include="State\TodoCollection.cs" />
     <Compile Include="TodoAppStore.cs" />
+    <Compile Include="Middleware\UpdateUiMiddleware.cs" />
     <Compile Include="Views\EditTodoView.xaml.cs">
       <DependentUpon>EditTodoView.xaml</DependentUpon>
     </Compile>
